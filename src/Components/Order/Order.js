@@ -47,7 +47,7 @@ const EmptyList = styled.p`
     text-align: center;
 `;
 
-export const Order = ({ orders, setOrders, setOpenItem }) => {
+export const Order = ({ orders, setOrders, setOpenItem, logIn, authentication }) => {
 
     const deleteItem = index => {
         const newOrders = orders.filter((item, i) => 
@@ -83,6 +83,8 @@ export const Order = ({ orders, setOrders, setOpenItem }) => {
                 <span>{totalCounter}</span>
                 <TotalPrice>{formatCurrency(total)}</TotalPrice>
             </Total>
-            <ButtonCheckout>Оформить</ButtonCheckout>
+            {authentication ? 
+            <ButtonCheckout>Оформить</ButtonCheckout> : 
+            <ButtonCheckout onClick={logIn}>Войти в личный кабинет</ButtonCheckout>}
         </OrderStyled>
 )};

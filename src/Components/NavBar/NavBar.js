@@ -32,7 +32,7 @@ const ImgLogo = styled.img`
 `;
 
 const SignImg = styled.img`
-    width: 35px;
+    width: 50px;
 `;
 
 const Sign = styled.button`
@@ -42,15 +42,43 @@ const Sign = styled.button`
     font-size: 16px;
 `;
 
-export const NavBar = () => (
+const User = styled.div`
+    display: flex;
+    align-item: center;
+    text-align: center;
+`;
+
+const LogOut = styled.span`
+    font-size: 20px;
+    font-weight: 700px;
+    cursor: pointer;
+    margin-right: 30px;
+`;
+
+const Figure = styled.figure`
+    margin: 0 30px;
+`;
+
+export const NavBar = ({ authentication, logIn, logOut }) => (
     <NavBarStyled>
         <Logo>
             <ImgLogo src={logoImg} alt="logo"/>
             <H1>BoorgerShop</H1>
         </Logo>
-        <Sign>
-            <SignImg src={signImg} alt="войти"/>
-            <p>Войти</p>
-        </Sign>
+        {authentication ? 
+            <User>
+                <Figure>
+                    <SignImg src={signImg} alt={authentication.displayName}/>
+                    <figcaption>{authentication.displayName}</figcaption>
+                </Figure>
+                <LogOut title="Выйти" onClick={logOut}>X</LogOut>
+            </User> : 
+            <Sign onClick={logIn}>
+                <Figure>
+                    <SignImg src={signImg} alt="войти"/>    
+                    <figcaption>Войти</figcaption>
+                </Figure>
+            </Sign> 
+            }
     </NavBarStyled>
 );

@@ -1,4 +1,6 @@
 import React from 'react';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import { NavBar } from './Components/NavBar/NavBar';
 import { Menu } from './Components/Menu/Menu';
 import { GlobalStyle } from './Components/Style/GlobalStyle';
@@ -6,17 +8,32 @@ import { ModalItem } from './Components/Modal/ModalItem';
 import { Order } from './Components/Order/Order';
 import { useOpenItem } from './Components/Hooks/useOpenItem';
 import { useOrders } from './Components/Hooks/useOrders';
+import { useAuth } from './Components/Hooks/useAuth';
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyA0K6-qq10lUvm1V2Ve8aTBT6iLY45j8VI",
+  authDomain: "burgershop-1d953.firebaseapp.com",
+  databaseURL: "https://burgershop-1d953.firebaseio.com",
+  projectId: "burgershop-1d953",
+  storageBucket: "burgershop-1d953.appspot.com",
+  messagingSenderId: "765552491915",
+  appId: "1:765552491915:web:9b5fb7952a5620fe10c38e"
+};
+
+firebase.initializeApp(firebaseConfig);
 
 function App() {
-  
+
+  const auth = useAuth(firebase.auth);
   const openItem = useOpenItem();
   const orders = useOrders();
 
   return (
     <>
       <GlobalStyle/>
-      <NavBar/>
-      <Order {...orders} {...openItem} />
+      <NavBar {...auth}/>
+      <Order {...orders} {...openItem} {...auth} />
       <Menu {...openItem} />
       { openItem.openItem && <ModalItem {...openItem} {...orders}/>}
     </>
