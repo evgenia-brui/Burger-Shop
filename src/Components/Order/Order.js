@@ -68,6 +68,7 @@ export const Order = ({ orders, setOrders, setOpenItem, logIn, authentication, f
             email: authentication.email,
             order: newOrder
         });
+        setOrders([]);
     }
 
     const deleteItem = index => {
@@ -108,7 +109,7 @@ export const Order = ({ orders, setOrders, setOpenItem, logIn, authentication, f
                 if (authentication) {
                     sendOrder();
                 }else {
-                    logIn()
+                    logIn();
                 }
             }}>Оформить</ButtonCheckout> 
         </OrderStyled>
