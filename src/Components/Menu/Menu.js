@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { ListItem } from './ListItem';
 import { Banner } from './Banner';
-import { useFetch } from '../Hooks/useFetch';
+// import { useFetch } from '../Hooks/useFetch';
 
 const MenuStyled = styled.main`
     background-color: #ccc;
@@ -13,21 +13,38 @@ const MenuStyled = styled.main`
 const SectionMenu = styled.section`
     padding: 30px;
 `;
+
+const Loader = styled.div`
+    border: 16px solid #f3f3f3;
+    border-top: 16px solid #333;
+    border-radius: 50%;
+    width: 120px;
+    hight: 120px;
+    animation: spin 2s linear infinite;
+`;
+
 // const loader = document.getElementById('loader');
 // function showLoadingSpinner() {
 //     loader.hidden = false;
-
+//     SectionMenu.hidden = true;
 // }
 
-export const Menu = ({ setOpenItem }) => {
+// function removeLoadingSpinner() {
+//     if (!loader.hidden){
+//         SectionMenu.hidden = false;
+//         loader.hidden = true;
+//     }
+// }
 
-  const res = useFetch();
-  const dbMenu = res.response;
+export const Menu = ({ setOpenItem, dbMenu }) => {
+
+//   const res = useFetch();
+//   const dbMenu = res.response;
 
     return (
         <MenuStyled>
             <Banner/>
-            {res.response ? 
+            {dbMenu ? 
             <>
                 <SectionMenu>
                 <h2>Бургеры</h2>
@@ -43,9 +60,8 @@ export const Menu = ({ setOpenItem }) => {
                     setOpenItem={setOpenItem}
                     />
                 </SectionMenu>
-            </> : res.error ? 
-            <div>Sorry, we will fix it soon...</div> : 
-            <div>loading...</div>
+            </> : 
+            <Loader>loading...</Loader>
             }
         </MenuStyled>
     )

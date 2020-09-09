@@ -57,13 +57,11 @@ const rulesData = {
     choice: ['choice', item => item ? item : 'no choices'],
 }
 
-export const Order = ({ orders, setOrders, setOpenItem, logIn, authentication, firebaseDatabase }) => {
-
-    const dataBase = firebaseDatabase();
+export const Order = ({ orders, setOrders, setOpenItem, logIn, authentication, database }) => {
 
     const sendOrder = () => {
         const newOrder = orders.map(projection(rulesData));
-        dataBase.ref('orders').push().set({
+        database.ref('orders').push().set({
             nameClient: authentication.displayName,
             email: authentication.email,
             order: newOrder
