@@ -46,21 +46,16 @@ function App() {
     <Context.Provider value={{
       auth,
       openItem,
+      orders,
+      orderConfirm,
+      firebaseDatabase: firebase.database,
     }}>
-      <GlobalStyle/>
-      <NavBar/>
-      <Order 
-        {...orders} 
-        {...openItem} 
-        {...auth} 
-        
-        {...orderConfirm}
-      />
+      <GlobalStyle />
+      <NavBar />
+      <Order />
       <Menu dbMenu={dbMenu} />
-      { openItem.openItem && <ModalItem {...openItem} {...orders}/>}
-      {orderConfirm.openOrderConfirm &&
-      <OrderConfirm {...orders} {...auth} {...orderConfirm} 
-      firebaseDatabase={firebase.database}/>}
+      { openItem.openItem && <ModalItem />}
+      {orderConfirm.openOrderConfirm && <OrderConfirm />}
     </Context.Provider>
   );
 }
